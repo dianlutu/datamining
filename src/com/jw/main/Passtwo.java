@@ -18,11 +18,15 @@ public class Passtwo {
 		
 		
 		ArrayList<Integer> list = new ArrayList<Integer>();
+		
 		ArrayList<String> SetCandidate = new ArrayList<String>();
+		
 		Set<Integer> keys = Passone.FirstMap.keySet();
+		
 		for (Object key : keys) {
 			list.add((Integer) key);
 		}
+		//making data pairs as the pass two candidate by using pass one result
 		for(int i=0;i<list.size();i++){
 			for(int j = i+1; j<list.size();j++){
 				
@@ -33,36 +37,46 @@ public class Passtwo {
 //		for (String Settemp : SetCandidate) {
 //			System.out.println(Settemp);
 //		}
+		//find number of each candidate in the whole baskets and find out the good one
 		for(int i=0;i<SetCandidate.size();i++){
+			//present support number
 			int SupportNumber = 0;
 			String[] temp = SetCandidate.get(i).split(",");
+			//split candidate set into ArrayList
 			ArrayList<String> arrC = new ArrayList<String>();
 			for (String temp1 : temp) {
 				arrC.add(temp1);
 			}
 			String line = null;
+			//read file
 			BufferedReader file = new BufferedReader(new FileReader(Info.recordFilePath));
-			line = file.readLine();//skip first line
+			line = file.readLine();//skip first line£¨50 5£©
+			
 			int count = 0;
+			//read every line of the input
 			while (count < Info.BAG_AMOUNT){
 				line = file.readLine();
 				String[] data = line.split(",");
+				//split
 				ArrayList<String> arrD = new ArrayList<String>();
+				
 				for (String data1 : data) {
 					arrD.add(data1);
 				}
+				//if this basket contains all the data of this candidate, which mains that this candidate occurred in this basket
 				if (arrD.containsAll(arrC)){
 					SupportNumber++;
 				}
 				count++;
 			}
-			
+			//find the good one and put it into secondmap
 			if(SupportNumber>=Info.SUPPORT_NUMBER){
 				SecondMap.put(SetCandidate.get(i), SupportNumber);
-			}	
+			}
+			//close file to insure that next time will not read the file from line (52)
 			file.close();
 		}
-		
+		//output
 		Passone.output(SecondMap);
 		
 		

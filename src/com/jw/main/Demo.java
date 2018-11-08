@@ -12,6 +12,7 @@ public class Demo {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//time
 		System.out.println("running time=" + (System.nanoTime() - startTime));
 	}
 
