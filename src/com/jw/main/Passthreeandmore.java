@@ -96,14 +96,21 @@ public class Passthreeandmore {
 		for(int i=0;i<list.size();i++){
 			for(int j = i+1; j<list.size();j++){
 				//find two previous key set that the first n-1 are same and the last one is not same 
-				String ifront = list.get(i).substring(0,list.get(i).length()-1);
-				String iend = list.get(i).substring(list.get(i).length()-1,list.get(i).length());
-				String jfront = list.get(j).substring(0,list.get(j).length()-1);
-				String jend = list.get(j).substring(list.get(j).length()-1,list.get(j).length());
+				String ifront = list.get(i).substring(0,list.get(i).length()-2);
+				String iend = list.get(i).substring(list.get(i).length()-2,list.get(i).length());
+				String jfront = list.get(j).substring(0,list.get(j).length()-2);
+				String jend = list.get(j).substring(list.get(j).length()-2,list.get(j).length());
 				if(ifront.equals(jfront)&&(iend.equals(jend)==false)){
 					//merge the new candidate
-					String NCandidate = list.get(i)+","+jend;
-					SetCandidatetemp.add(NCandidate);
+					if(jend.substring(0,1).equals(","))
+					{
+						String NCandidate = list.get(i)+jend;
+						SetCandidatetemp.add(NCandidate);
+					}
+					else{
+						String NCandidate = list.get(i)+","+jend;
+						SetCandidatetemp.add(NCandidate);
+					}
 				}
 				//i:A    j:B
 				//if find this B set n-1 are not same with A, then the key set (n-1) after it will not same with A,because it sorted. so find the next A 
