@@ -61,7 +61,13 @@ public class Passthreeandmore {
 				String[] data = line.split(",");
 				ArrayList<String> arrD = new ArrayList<String>();
 				for (String data1 : data) {
-					arrD.add(data1);
+					if(data1.length()==1)
+					{
+						arrD.add("0"+data1);
+					}
+					else{
+						arrD.add(data1);
+					}
 				}
 				if (arrD.containsAll(arrC)){
 					SupportNumber++;

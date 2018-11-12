@@ -29,8 +29,20 @@ public class Passtwo {
 		//making data pairs as the pass two candidate by using pass one result
 		for(int i=0;i<list.size();i++){
 			for(int j = i+1; j<list.size();j++){
+				String Candidate = null;
+				if(list.get(i)<10 && list.get(j)<10){
+					Candidate = "0"+list.get(i)+","+"0"+list.get(j);
+				}
+				else if(list.get(i)<10 && list.get(j)>=10){
+					Candidate = "0"+list.get(i)+","+list.get(j);
+				}
+				else if(list.get(i)>=10 && list.get(j)<10){
+					Candidate = list.get(i)+","+"0"+list.get(j);
+				}
+				else{
+					Candidate = list.get(i)+","+list.get(j);
+				}
 				
-				String Candidate = list.get(i)+","+list.get(j);
 				SetCandidate.add(Candidate);
 			}
 		}
@@ -61,7 +73,13 @@ public class Passtwo {
 				ArrayList<String> arrD = new ArrayList<String>();
 				
 				for (String data1 : data) {
-					arrD.add(data1);
+					if(data1.length()==1)
+					{
+						arrD.add("0"+data1);
+					}
+					else{
+						arrD.add(data1);
+					}
 				}
 				//if this basket contains all the data of this candidate, which mains that this candidate occurred in this basket
 				if (arrD.containsAll(arrC)){
